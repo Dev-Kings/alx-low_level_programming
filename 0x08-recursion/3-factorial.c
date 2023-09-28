@@ -25,4 +25,4 @@ int factorial(int n)
 		f = n * factorial(n - 1);
 	}
 	return (f);
-}	
+}

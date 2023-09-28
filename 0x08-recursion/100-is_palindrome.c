@@ -14,6 +14,10 @@ int checkIfPalindrome(char *s, int leftIndex, int rightIndex);
 
 int is_palindrome(char *s)
 {
+	if (strlen(s) == 0)
+	{
+		return (1);
+	}
 	return (checkIfPalindrome(s, 0, strlen(s) - 1));
 }
 

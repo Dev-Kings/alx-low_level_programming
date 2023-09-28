@@ -4,6 +4,7 @@
  * _sqrt_recursion - finds square root of a number
  *
  * @n: The number
+ * @i: 0 passed to _sqrt_recurse function
  *
  * Return: square root
  */

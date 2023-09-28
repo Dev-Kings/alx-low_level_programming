@@ -4,10 +4,19 @@
 /**
  * _puts_recursion - prints string
  *@c: The character to be passed
+ *
  * Return: String
  */
 
-int _puts_recursion(char *c)
+void _puts_recursion(char *c)
 {
-	return (_putchar(c));
+	if (*c)
+	{
+		_putchar(*c);
+		_puts_recursion(c + 1);
+	}
+	else
+	{
+		_putchar('\n');
+	}
 }

@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 
 int checkIfPalindrome(char *s, int leftIndex, int rightIndex);
 
@@ -13,11 +14,7 @@ int checkIfPalindrome(char *s, int leftIndex, int rightIndex);
 
 int is_palindrome(char *s)
 {
-	if (sizeof(*s) == 1)
-	{
-		return (1);
-	}
-	return (checkIfPalindrome(s, 0, sizeof(*s) - 1));
+	return (checkIfPalindrome(s, 0, strlen(s) -1));
 }
 
 /**

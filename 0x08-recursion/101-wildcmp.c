@@ -23,6 +23,8 @@ int wildcmp(char *s1, char *s2)
  * @s2: second string address
  * @i: left index first string
  * @j: left index second string
+ *
+ * Return: 1 if identical, 0 if not
  */
 
 int str_comparator(char *s1, char *s2, int i, int j)

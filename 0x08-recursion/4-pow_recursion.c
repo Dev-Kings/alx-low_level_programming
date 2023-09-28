@@ -3,7 +3,8 @@
 /**
  * _pow_recursion -computes x power y
  *
- * @x,y: The integers to be computed
+ * @x: The base integer
+ * @y: The power to be raised
  *
  * Return: the integer value of x power y
  */

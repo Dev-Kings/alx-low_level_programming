@@ -22,7 +22,8 @@ int _sqrt_recursion(int n)
 /**
  * _sqrt_recurse - finds natural sqrt of a number
  *
- * @n: number to find square roo
+ * @n: number to find square root
+ * @i: counter to be incremented
  *
  * Return: the square root
  */

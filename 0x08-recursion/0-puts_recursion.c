@@ -7,7 +7,7 @@
  * Return: String
  */
 
-int _puts_recursion(char* c)
+int _puts_recursion(char *c)
 {
 	return (_putchar(c));
 }

@@ -3,7 +3,7 @@
 int prime(int n, int i);
 
 /**
- * is-prime_number - checks whether number
+ * is_prime_number - checks whether number
  * is a prime number
  *
  * @n: the number being checked
@@ -23,7 +23,6 @@ int is_prime_number(int n)
 
 /**
  * prime - computes if a number is prime recursively
- * 
  * @n: number to evaluate
  * @i: value to iterate
  *

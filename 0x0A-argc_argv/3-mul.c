@@ -16,6 +16,7 @@ int strtointeger(char *s)
 	return num;
 }
 
+
 /**
  * main - multiplies 2 numbers
  *

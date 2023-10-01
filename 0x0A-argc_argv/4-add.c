@@ -7,7 +7,7 @@
  * check_num - check - string there are digit
  * @str: array str
  *
- * Return: Always 0 (Success)
+ * Return: 0 if successful, 1 if not
  */
 
 int check_num(char *str)
@@ -15,9 +15,9 @@ int check_num(char *str)
 	unsigned int count;
 
 	count = 0;
-	while (count < strlen(str)) /*count string*/
+	while (count < strlen(str))
 	{
-		if (!isdigit(str[count])) /*check if str there are digit*/
+		if (!isdigit(str[count]))
 		{
 			return (0);
 		}
@@ -27,28 +27,28 @@ int check_num(char *str)
 }
 
 /**
- * main - Print the name of the program
+ * main - sum positive integers
  * @argc: Count arguments
- * Return: Always 0 (Success)
+ * @argv: array of pointer to arguments
+ *
+ * Return: Always 0
  */
 
 int main(int argc, char *argv[])
 {
-	/*Declaring variables*/
 	int count;
 	int str_to_int;
 	int sum = 0;
 
 	count = 1;
 
-	while (count < argc) /*Goes through the whole array*/
+	while (count < argc)
 	{
 		if (check_num(argv[count]))
 		{
-			str_to_int = atoi(argv[count]); /*ATOI --> convert string to int*/
+			str_to_int = atoi(argv[count]);
 			sum += str_to_int;
 		}
-		/*Condition if one of the number contains symbols that are not digits*/
 		else
 		{
 			printf("Error\n");
@@ -56,6 +56,6 @@ int main(int argc, char *argv[])
 		}
 		count++;
 	}
-	printf("%d\n", sum); /*print sum*/
+	printf("%d\n", sum);
 	return (0);
 }

@@ -7,7 +7,7 @@
  *
  * @s: string received
  *
- * @Return: integer from string
+ * Return: integer from string
  */
 
 int strtointeger(char *s)
@@ -22,7 +22,7 @@ int strtointeger(char *s)
  * @argc: number of arguments
  * @argv: array of arguments pointer
  *
- * Return: Always 0
+ * Return: 0 if successful, 1 if error
  */
 
 int main(int argc, char *argv[] __attribute__((unused)))

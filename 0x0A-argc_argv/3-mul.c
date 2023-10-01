@@ -1,47 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
 
 /**
- * strtointeger -converts string to integer
+ * main - multiplies two numbers.
+ * @argc: argument count
+ * @argv: arguments
  *
- * @s: string received
- *
- * Return: integer from string
+ * Return: 0
  */
-
-int strtointeger(char *s)
+int main(int argc, char **argv)
 {
-	int num = atoi(s);
-	return num;
-}
+	int x, y;
 
-
-/**
- * main - multiplies 2 numbers
- *
- * @argc: number of arguments
- * @argv: array of arguments pointer
- *
- * Return: 0 if successful, 1 if error
- */
-
-int main(int argc, char *argv[] __attribute__((unused)))
-{
-	int num1, num2, product;
-
-	if (argc == 3)
-	{
-		num1 = strtointeger(argv[1]);
-		num2 = strtointeger(argv[2]);
-
-		product = num1 * num2;
-		printf("%d\n", product);
-	}
-	if (argc < 3 || argc > 3)
+	if (argc < 3)
 	{
 		printf("Error\n");
 		return (1);
 	}
+
+	x = atoi(argv[1]);
+	y = atoi(argv[2]);
+	printf("%d\n", x * y);
+
 	return (0);
 }

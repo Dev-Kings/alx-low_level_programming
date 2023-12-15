@@ -5,6 +5,7 @@
  * @h: pointer to pointer to first node.
  * @idx: index to insert
  * @n: node value
+ *
  * Return: address of new node, else NULL.
  */
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
@@ -28,23 +29,30 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		*h = new_node;
 		return (new_node);
 	}
-	if (current == NULL || idx == 0)
-		return (NULL);
-	while (current->next != NULL && node_position + 1 != idx)
+	while (current != NULL && node_position != idx)
 	{
 		node_position++;
 		current = current->next;
 	}
-	if (node_position + 1 != idx)
+	if (node_position != idx)
 	{
 		free(new_node);
 		return (NULL);
 	}
 	new_node->n = n;
-	new_node->prev = current;
-	new_node->next = current->next;
-	if (current->next != NULL)
-		(current->next)->prev = new_node;
-	current->next = new_node;
+	if (current == NULL)
+	{
+		new_node->prev = *h;
+		new_node->next = NULL;
+		(*h)->next = new_node;
+	}
+	else
+	{
+		new_node->prev = current->prev;
+		new_node->next = current;
+		if (current->prev != NULL)
+			(current->prev)->next = new_node;
+		current->prev = new_node;
+	}
 	return (new_node);
 }

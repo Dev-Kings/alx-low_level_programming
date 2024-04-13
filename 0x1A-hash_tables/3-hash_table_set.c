@@ -76,6 +76,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
 	hash_node_t *current_ht_index;
+	char *value_copy;
 
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
@@ -90,5 +91,21 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		ht->array[index] = create_node(key, value);
 		return (ht->array[index] != NULL);
 	}
+
+	while (current_ht_index != NULL)
+	{
+		if (strcmp(current_ht_index->key, key) == 0)
+		{
+			/* Update value */
+			value_copy = strdup(value);
+			if (value_copy == NULL)
+				return (0);
+			free(current_ht_index->value); /* Free old value */
+			current_ht_index->value = value_copy; /* Assign new value */
+			return (1);
+		}
+		current_ht_index = current_ht_index->next;
+	}
+
 	return (handle_collision(&current_ht_index, key, value));
 }

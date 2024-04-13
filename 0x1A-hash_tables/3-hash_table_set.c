@@ -1,6 +1,70 @@
 #include "hash_tables.h"
 
 /**
+ * create_node - creates a new hash node.
+ * @key: The key for the node.
+ * @value: The value for the node.
+ *
+ * Return: Pointer to the new hash node, or NULL on failure.
+ */
+hash_node_t *create_node(const char *key, const char *value)
+{
+	hash_node_t *node;
+
+	node = malloc(sizeof(hash_node_t));
+	if (node == NULL)
+		return (NULL);
+
+	node->key = strdup(key);
+	if (node->key == NULL)
+	{
+		free(node);
+		return (NULL);
+	}
+
+	node->value = strdup(value);
+	if (node->value == NULL)
+	{
+		free(node->key);
+		free(node);
+		return (NULL);
+	}
+
+	node->next = NULL;
+
+	return (node);
+}
+
+/**
+ * handle_collision - handles key collision on same index by appending
+ *  new node to the list.
+ *  @head: Pointer to head of hash node in list.
+ *  @key: The key for the new node.
+ *  @value: The value for the new node.
+ *
+ *  Return: 1 on success, 0 on failure.
+ */
+int handle_collision(hash_node_t **head, const char *key, const char *value)
+{
+	hash_node_t *new_node;
+
+	if (head == NULL || key == NULL || value == NULL)
+		return (0);
+
+	/* Create a new node */
+	new_node = create_node(key, value);
+	if (new_node == NULL)
+		return (0);
+
+	/* Append new node at beginning of list */
+	new_node->next = *head;
+	*head = new_node;
+
+	return (1);
+}
+
+
+/**
  * hash_table_set - adds element to the hash table.
  * @ht: The hash table.
  * @key: The key to add.
@@ -10,42 +74,21 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int hashed_value, index;
+	unsigned long int index;
 	hash_node_t *current_ht_index;
-	hash_node_t *node;
 
-	hashed_value = hash_djb2((const unsigned char *)key);
-	index = hashed_value % ht->size;
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+		return (0);
+
+	index = key_index((const unsigned char *)key, ht->size);
 	current_ht_index = ht->array[index];
 
-	/* Create a pointer to a table item */
-	node = (hash_node_t *)malloc(sizeof(hash_node_t));
-	if (node == NULL)
-		return (0);
-	node->key = (char *)malloc(strlen(key) + 1);
-	node->value = (char *)malloc(strlen(value) + 1);
-	strcpy(node->key, key);
-	strcpy(node->value, value);
-
+	/* Check if slot is empty */
 	if (current_ht_index == NULL)
 	{
-		ht->array[index] = node;
-		return (1);
+		/* Create a node for the ky/value */
+		ht->array[index] = create_node(key, value);
+		return (ht->array[index] != NULL);
 	}
-	else
-	{
-		/* Key exists, update the value */
-		if (strcmp(current_ht_index->key, key) == 0)
-		{
-			strcpy(ht->array[index]->value, value);
-		}
-		else
-		{
-			/* Collision detected */
-			printf("Key in place is '%s'\n", ht->array[index]->key);
-			printf("Collision detected\n");
-			printf("Key coming is '%s'\n", key);
-		}
-		return (1);
-	}
+	return (handle_collision(&current_ht_index, key, value));
 }

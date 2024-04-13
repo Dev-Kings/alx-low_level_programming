@@ -14,6 +14,7 @@ int main(void)
 
 	ht = hash_table_create(1024);
 	hash_table_set(ht, "cisfun", "cool");
+	hash_table_set(ht, "cisfun", "Cool X");
 	hash_table_set(ht, "hetairas", "Hate not");
 	hash_table_set(ht, "mentioner", "Mention");
 	/* hash_table_set(ht, "Don't forget to tweet today", "X"); */

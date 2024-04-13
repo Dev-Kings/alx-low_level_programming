@@ -21,9 +21,15 @@ char *hash_table_get(const hash_table_t *ht, const char *key)
 	if (current_ht_index->key == NULL || current_ht_index->value == NULL)
 		return (NULL);
 
-	if (strcmp(current_ht_index->key, key) == 0)
+	while (current_ht_index != NULL)
 	{
-		return (current_ht_index->value);
+		if (strcmp(current_ht_index->key, key) == 0)
+		{
+			if (current_ht_index->value == NULL)
+				return (NULL);
+			return (current_ht_index->value);
+		}
+		current_ht_index = current_ht_index->next;
 	}
-	return ("NA");
+	return (NULL);
 }

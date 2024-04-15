@@ -36,5 +36,7 @@ int main(void)
 	printf("%s:%s\n", "c", value);
 	value = hash_table_get(ht, "javascript");
 	printf("%s:%s\n", "javascript", value);
+	value = hash_table_get(NULL, "Canada");
+	printf("%s:%s\n", "Canada", value);
 	return (EXIT_SUCCESS);
 }

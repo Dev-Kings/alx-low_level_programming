@@ -9,31 +9,31 @@
  */
 hash_node_t *create_node(const char *key, const char *value)
 {
-	hash_node_t *node;
+	hash_node_t *current_ht_index;
 	char *value_copy;
 
-	node = (hash_node_t *)malloc(sizeof(hash_node_t));
-	if (node == NULL)
+	current_ht_index = (hash_node_t *)malloc(sizeof(hash_node_t));
+	if (current_ht_index == NULL)
 		return (NULL);
 
 	value_copy = strdup(value);
 	if (value_copy == NULL)
 	{
-		free(node);
+		free(current_ht_index);
 		return (NULL);
 	}
 
-	node->key = strdup(key);
-	if (node->key == NULL)
+	current_ht_index->key = strdup(key);
+	if (current_ht_index->key == NULL)
 	{
 		free(value_copy);
-		free(node);
+		free(current_ht_index);
 		return (NULL);
 	}
-	node->value = value_copy;
-	node->next = NULL;
+	current_ht_index->value = value_copy;
+	current_ht_index->next = NULL;
 
-	return (node);
+	return (current_ht_index);
 }
 
 /**
@@ -47,19 +47,19 @@ hash_node_t *create_node(const char *key, const char *value)
  */
 int handle_collision(hash_node_t **head, const char *key, const char *value)
 {
-	hash_node_t *new_node;
+	hash_node_t *current_ht_index;
 
 	if (head == NULL || key == NULL || value == NULL)
 		return (0);
 
 	/* Create a new node */
-	new_node = create_node(key, value);
-	if (new_node == NULL)
+	current_ht_index = create_node(key, value);
+	if (current_ht_index == NULL)
 		return (0);
 
 	/* Append new node at beginning of list */
-	new_node->next = *head;
-	*head = new_node;
+	current_ht_index->next = *head;
+	*head = current_ht_index;
 
 	return (1);
 }

@@ -76,7 +76,7 @@ int handle_collision(hash_node_t **head, const char *key, const char *value)
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
-	hash_node_t *current_ht_index;
+	hash_node_t *current_ht_index, *temp_node;
 	char *value_copy;
 
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
@@ -95,6 +95,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 
 	while (current_ht_index != NULL)
 	{
+		temp_node = current_ht_index->next;
 		if (strcmp(current_ht_index->key, key) == 0)
 		{
 			/* Update value */
@@ -105,8 +106,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 			current_ht_index->value = value_copy; /* Assign new value */
 			return (1);
 		}
-		current_ht_index = current_ht_index->next;
+		current_ht_index = temp_node;
 	}
 
-	return (handle_collision(&current_ht_index, key, value));
+	return (handle_collision(&(ht->array[index]), key, value));
 }

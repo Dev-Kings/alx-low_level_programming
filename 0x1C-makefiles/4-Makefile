@@ -1,0 +1,26 @@
+# Rules all, clean, oclean, fclear, re
+# Variables CC, SRC, OBJ, NAME, RM
+# Rules clean, oclean, fclean, re should fail should never fail
+
+CC = gcc
+SRC = school.c main.c
+OBJ = $(SRC:.c=.o)
+NAME = school
+RM = rm -f
+CFLAGS = -Wall -Werror -Wextra -pedantic
+
+.PHONY: all clean oclean fclean re
+
+all: $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+clean: 
+	$(RM) *~ $(NAME)
+
+
+oclean:
+	$(RM) $(OBJ)
+
+fclean: clean oclean
+
+re: fclean all

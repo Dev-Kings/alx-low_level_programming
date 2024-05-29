@@ -1,0 +1,6 @@
+# Executes school.c and main.c files to school executable automatically
+
+all: compile
+
+compile: school.c main.c
+	gcc school.c main.c -o school

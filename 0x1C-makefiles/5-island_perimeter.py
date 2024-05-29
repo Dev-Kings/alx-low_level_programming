@@ -9,6 +9,7 @@ described in the grid below:
     Grid is completely surrounded by water
 """
 
+
 def island_perimeter(grid):
     """Returns the perimeter of the island described in grid.
     Args:

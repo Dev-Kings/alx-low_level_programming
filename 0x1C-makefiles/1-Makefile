@@ -1,0 +1,9 @@
+# Executes .c files (main.c, school.c)
+
+CC = gcc
+SRC = school.c main.c
+
+all: compile
+
+compile: $(SRC)
+	$(CC) $(SRC) -o school
